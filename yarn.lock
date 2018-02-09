@@ -11,6 +11,15 @@
     typescript "~2.6.2"
     webpack-sources "^1.0.1"
 
+"@angular-devkit/core@^0.3.1":
+  version "0.3.1"
+  resolved "http://registry.npm.taobao.org/@angular-devkit/core/download/@angular-devkit/core-0.3.1.tgz#6aeb990dec92d06360597928748aeeedc21afdde"
+  dependencies:
+    ajv "~5.5.1"
+    chokidar "^1.7.0"
+    rxjs "^5.5.6"
+    source-map "^0.5.6"
+
 "@angular-devkit/schematics@~0.0.42":
   version "0.0.52"
   resolved "http://registry.npm.taobao.org/@angular-devkit/schematics/download/@angular-devkit/schematics-0.0.52.tgz#cbd2f42778b50d6422a254ffaec05ad4ef3cb6c0"
@@ -21,6 +30,12 @@
 "@angular/animations@^5.0.0":
   version "5.2.4"
   resolved "http://registry.npm.taobao.org/@angular/animations/download/@angular/animations-5.2.4.tgz#c5ec749d84a0434733a28a82c6cb6a4e15246201"
+  dependencies:
+    tslib "^1.7.1"
+
+"@angular/cdk@^5.2.0":
+  version "5.2.0"
+  resolved "http://registry.npm.taobao.org/@angular/cdk/download/@angular/cdk-5.2.0.tgz#4368f6749e915cdcc75d325ae33fdb3f85a88108"
   dependencies:
     tslib "^1.7.1"
 
@@ -259,7 +274,7 @@ ajv@^4.9.1:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
 
-ajv@^5.0.0, ajv@^5.1.0, ajv@^5.1.5:
+ajv@^5.0.0, ajv@^5.1.0, ajv@^5.1.5, ajv@~5.5.1:
   version "5.5.2"
   resolved "http://registry.npm.taobao.org/ajv/download/ajv-5.5.2.tgz#73b5eeca3fab653e3d3f9422b341ad42205dc965"
   dependencies:
