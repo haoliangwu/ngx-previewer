@@ -1,9 +1,11 @@
 import { DefaultViewerComponent } from './default-viewer/default-viewer.component';
 import { ImgViewerComponent } from './img-viewer/img-viewer.component';
+import { NativeAudioViewerComponent } from './audio-viewer/native-audio-viewer.component';
 
 export const DEFAULT_VIEWER_COMPS = [
   DefaultViewerComponent,
-  ImgViewerComponent
+  ImgViewerComponent,
+  NativeAudioViewerComponent
 ];
 
 export * from './previewer.module';

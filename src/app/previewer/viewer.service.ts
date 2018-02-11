@@ -1,8 +1,9 @@
 import { Injectable, Type, Inject } from '@angular/core';
 import { ImgViewerComponent, DefaultViewerComponent } from './index';
 import { BaseViewerComponent } from './base-viewer/base-viewer.component';
-import { ViewerRules, ViewerConfig, ViewerRule, DEFAULT_CONFIG, ImgViewerConfig } from './model/viewer';
+import { ViewerRules, ViewerConfig, ViewerRule, DEFAULT_CONFIG, ImgViewerConfig, AudioViewerConfig } from './model/viewer';
 import { GlobalConfig, globalConfig } from './model/config';
+import { NativeAudioViewerComponent } from './audio-viewer/native-audio-viewer.component';
 
 @Injectable()
 export class ViewerService {
@@ -20,11 +21,14 @@ export class ViewerService {
     img: {
       viewer: ImgViewerComponent,
       config: {
-        zoom: false,
-        printable: false,
-        draggable: false,
         autoFit: true
       } as ImgViewerConfig
+    },
+    audio: {
+      viewer: NativeAudioViewerComponent,
+      config: {
+       autoPlay: false
+      } as AudioViewerConfig
     }
   };
 
@@ -49,6 +53,10 @@ export class ViewerService {
     if (!rule) {
       if (this.isImage(file)) {
         return this.typeRules.img;
+      }
+
+      if (this.isAudio(file)) {
+        return this.typeRules.audio;
       }
     }
 
@@ -78,5 +86,9 @@ export class ViewerService {
 
   private isImage(file: File) {
     return file.type.match('image.*');
+  }
+
+  private isAudio(file: File) {
+    return file.type.match('audio.*');
   }
 }

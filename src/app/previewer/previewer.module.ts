@@ -9,6 +9,9 @@ import { ViewerService } from './viewer.service';
 import { GlobalConfig } from './model/config';
 import { BaseViewerComponent } from './base-viewer/base-viewer.component';
 import { globalConfig } from './model/config';
+import { NativeAudioViewerComponent } from './audio-viewer/native-audio-viewer.component';
+
+import { SafeUrlPipe } from './pipes/safe-url.pipe';
 
 @NgModule({
   imports: [
@@ -17,7 +20,9 @@ import { globalConfig } from './model/config';
   declarations: [
     ImgViewerComponent,
     PreviewContainerComponent,
-    DefaultViewerComponent
+    DefaultViewerComponent,
+    NativeAudioViewerComponent,
+    SafeUrlPipe
   ],
   exports: [
     PreviewContainerComponent

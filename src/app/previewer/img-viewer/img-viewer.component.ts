@@ -24,9 +24,9 @@ export class ImgViewerComponent extends BaseViewerComponent implements OnInit, O
     @Inject(forwardRef(() => PreviewContainerComponent))
     private containerComp: PreviewContainerComponent,
     protected readerService: ReaderService,
-    @Inject(viewerConfig) protected viewConfig: ImgViewerConfig
+    @Inject(viewerConfig) protected config: ImgViewerConfig
   ) {
-    super(readerService);
+    super();
 
     this.render = this.render.bind(this);
   }
@@ -61,7 +61,8 @@ export class ImgViewerComponent extends BaseViewerComponent implements OnInit, O
       let sw, sh;
       let x = 0, y = 0;
 
-      if (this.viewConfig.autoFit) {
+      // if autoFit = true, should adjust image size based on canvas
+      if (this.config.autoFit) {
         [sw, sh] = geometricScaling(img.width, img.height, this.canvas.width, this.canvas.height);
         [x, y] = alignCenter(sw, sh, this.canvas.width, this.canvas.height);
       }

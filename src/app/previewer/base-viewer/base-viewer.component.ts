@@ -8,10 +8,6 @@ import { ReaderService } from '../reader.service';
   template: ''
 })
 export abstract class BaseViewerComponent {
-  constructor(
-    protected readerService: ReaderService
-  ) { }
-
   abstract loadFile(file: File): void;
   abstract render(data: string | ArrayBuffer): void;
 }
