@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { fromEvent } from 'rxjs/observable/fromEvent';
+import { ReaderService } from '../reader.service';
 
 @Component({
   selector: 'ngx-base-viewer',
-  templateUrl: './base-viewer.component.html',
-  styleUrls: ['./base-viewer.component.css']
+  template: ''
 })
-export class BaseViewerComponent implements OnInit {
+export abstract class BaseViewerComponent {
+  constructor(
+    protected readerService: ReaderService
+  ) { }
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  abstract loadFile(file: File): void;
+  abstract render(data: string | ArrayBuffer): void;
 }

@@ -1,26 +1,62 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders, ANALYZE_FOR_ENTRY_COMPONENTS } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PreviewContainerDirective } from './preview-container.directive';
-import { BaseViewerComponent } from './base-viewer/base-viewer.component';
+import { PreviewContainerComponent } from './preview-container.component';
 import { ImgViewerComponent } from './img-viewer/img-viewer.component';
+import { DefaultViewerComponent } from './default-viewer/default-viewer.component';
+import { ReaderService } from './reader.service';
+import { DEFAULT_VIEWER_COMPS } from './index';
+import { ViewerService } from './viewer.service';
+import { GlobalConfig } from './model/config';
+import { BaseViewerComponent } from './base-viewer/base-viewer.component';
+import { globalConfig } from './model/config';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [
-    BaseViewerComponent,
     ImgViewerComponent,
-    PreviewContainerDirective
+    PreviewContainerComponent,
+    DefaultViewerComponent
   ],
   exports: [
-    PreviewContainerDirective
+    PreviewContainerComponent
   ],
   entryComponents: [
-    BaseViewerComponent,
-    ImgViewerComponent
+    ImgViewerComponent,
+    DefaultViewerComponent
   ]
 })
-export class PreviewModule {
+export class NgxPreviewModule {
+  static forRoot(config: GlobalConfig<BaseViewerComponent> = {}, viewerComps: any[] = DEFAULT_VIEWER_COMPS): ModuleWithProviders {
+    return {
+      ngModule: NgxPreviewModule,
+      providers: [
+        ReaderService,
+        ViewerService,
+        {
+          provide: ANALYZE_FOR_ENTRY_COMPONENTS,
+          useValue: viewerComps,
+          multi: true
+        },
+        {
+          provide: globalConfig,
+          useValue: config
+        }
+      ]
+    };
+  }
 
+  static withEntryComps(viewerComps: any[]): ModuleWithProviders {
+    return {
+      ngModule: NgxPreviewModule,
+      providers: [
+        {
+          provide: ANALYZE_FOR_ENTRY_COMPONENTS,
+          useValue: viewerComps,
+          multi: true
+        }
+      ]
+    };
+  }
 }

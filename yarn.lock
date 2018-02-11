@@ -33,7 +33,7 @@
   dependencies:
     tslib "^1.7.1"
 
-"@angular/cdk@^5.2.0":
+"@angular/cdk@^5.0.0", "@angular/cdk@^5.1.1":
   version "5.2.0"
   resolved "http://registry.npm.taobao.org/@angular/cdk/download/@angular/cdk-5.2.0.tgz#4368f6749e915cdcc75d325ae33fdb3f85a88108"
   dependencies:
@@ -3563,6 +3563,10 @@ mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkd
   dependencies:
     minimist "0.0.8"
 
+moment@^2.18.1:
+  version "2.20.1"
+  resolved "http://registry.npm.taobao.org/moment/download/moment-2.20.1.tgz#d6eb1a46cbcc14a2b2f9434112c1ff8907f313fd"
+
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/move-concurrently/download/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"
@@ -3610,6 +3614,32 @@ ncname@1.0.x:
 negotiator@0.6.1:
   version "0.6.1"
   resolved "http://registry.npm.taobao.org/negotiator/download/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
+
+ng-zorro-antd@^0.6.14:
+  version "0.6.14"
+  resolved "http://registry.npm.taobao.org/ng-zorro-antd/download/ng-zorro-antd-0.6.14.tgz#b9551fe847d7b33669e2a01b7851f46877eda183"
+  dependencies:
+    "@angular/cdk" "^5.0.0"
+    moment "^2.18.1"
+    tslib "^1.7.1"
+
+ngx-loading-mask@^0.4.1:
+  version "0.4.1"
+  resolved "http://registry.npm.taobao.org/ngx-loading-mask/download/ngx-loading-mask-0.4.1.tgz#4fbd2652ac97f357f6300d0dd6c61cab0fbc76cc"
+  dependencies:
+    "@angular/animations" "^5.0.0"
+    "@angular/cdk" "^5.1.1"
+    "@angular/common" "^5.0.0"
+    "@angular/compiler" "^5.0.0"
+    "@angular/core" "^5.0.0"
+    "@angular/forms" "^5.0.0"
+    "@angular/http" "^5.0.0"
+    "@angular/platform-browser" "^5.0.0"
+    "@angular/platform-browser-dynamic" "^5.0.0"
+    "@angular/router" "^5.0.0"
+    core-js "^2.4.1"
+    rxjs "^5.5.2"
+    zone.js "^0.8.14"
 
 no-case@^2.2.0:
   version "2.3.2"

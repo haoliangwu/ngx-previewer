@@ -54,7 +54,10 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
-    "component": {}
+    "styleExt": "scss",
+    "component": {},
+    "build": {
+      "showCircularDependencies": false
+    }
   }
 }

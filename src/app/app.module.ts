@@ -3,8 +3,10 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { PreviewModule } from './previewer/previewer.module';
-
+import { NgxPreviewModule, DEFAULT_VIEWER_COMPS } from './previewer/index';
+import { DefaultViewerComponent } from './previewer/default-viewer/default-viewer.component';
+import { LoadingMaskModule } from 'ngx-loading-mask';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 @NgModule({
   declarations: [
@@ -12,7 +14,14 @@ import { PreviewModule } from './previewer/previewer.module';
   ],
   imports: [
     BrowserModule,
-    PreviewModule
+    NgxPreviewModule.forRoot({}, DEFAULT_VIEWER_COMPS),
+    LoadingMaskModule.forRoot({
+      snippet: {
+        imgUrl: 'http://littlelyon.com/ngx-loading-mask/assets/ripple.svg',
+        size: 144
+      }
+    }),
+    NgZorroAntdModule.forRoot()
   ],
   providers: [],
   bootstrap: [

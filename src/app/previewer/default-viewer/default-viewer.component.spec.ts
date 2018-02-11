@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BaseViewerComponent } from './base-viewer.component';
+import { DefaultViewerComponent } from './default-viewer.component';
 
-describe('BaseViewerComponent', () => {
-  let component: BaseViewerComponent;
-  let fixture: ComponentFixture<BaseViewerComponent>;
+describe('DefaultViewerComponent', () => {
+  let component: DefaultViewerComponent;
+  let fixture: ComponentFixture<DefaultViewerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BaseViewerComponent ]
+      declarations: [ DefaultViewerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BaseViewerComponent);
+    fixture = TestBed.createComponent(DefaultViewerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
