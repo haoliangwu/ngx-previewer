@@ -1,11 +1,18 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { ViewerService } from './viewer.service';
+import { globalConfig } from './model/config';
 
 describe('ViewerService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ViewerService]
+      providers: [
+        {
+          provide: globalConfig,
+          useValue: {}
+        },
+        ViewerService
+      ]
     });
   });
 
