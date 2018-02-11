@@ -1,4 +1,4 @@
-import { ViewerRules, ViewerRule } from './viewer';
+import { ViewerRules, ViewerRule, ImgViewerConfig, ViewerConfig } from './viewer';
 import { BaseViewerComponent } from '../base-viewer/base-viewer.component';
 
 import { InjectionToken } from '@angular/core';
@@ -13,3 +13,5 @@ export interface GlobalConfig<T extends BaseViewerComponent> {
     type?: ViewerRules<T>
   };
 }
+
+export const viewerConfig: InjectionToken<ViewerConfig> = new InjectionToken('preview.viewer.config');

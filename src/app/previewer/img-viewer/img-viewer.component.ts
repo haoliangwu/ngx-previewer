@@ -6,6 +6,8 @@ import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
 import { PreviewContainerComponent } from '../preview-container.component';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { ReaderService } from '../reader.service';
+import { viewerConfig } from '../model/config';
+import { ImgViewerConfig } from '../model/viewer';
 
 @Component({
   selector: 'ngx-img-viewer',
@@ -20,7 +22,8 @@ export class ImgViewerComponent extends BaseViewerComponent implements OnInit, O
   constructor(
     @Inject(forwardRef(() => PreviewContainerComponent))
     private containerComp: PreviewContainerComponent,
-    protected readerService: ReaderService
+    protected readerService: ReaderService,
+    @Inject(viewerConfig) protected viewConfig: ImgViewerConfig
   ) {
     super(readerService);
 
@@ -53,6 +56,13 @@ export class ImgViewerComponent extends BaseViewerComponent implements OnInit, O
     img.src = data;
 
     // TODO 这里需要根据容器和图片的宽高比进行缩放
-    img.onload = () => ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
+    img.onload = () => {
+      if (this.viewConfig.autoFit) {
+        console.log(img.width, img.height);
+        console.log(this.canvas.width, this.canvas.height);
+      }
+
+      ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
+    };
   }
 }

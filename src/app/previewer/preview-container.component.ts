@@ -5,6 +5,7 @@ import { BaseViewerComponent } from './base-viewer/base-viewer.component';
 import { ReaderService } from './reader.service';
 import { ViewerService } from './viewer.service';
 import { getBlockElementRect } from './utils/dom';
+import { viewerConfig } from './model/config';
 
 @Component({
   selector: 'ngx-preview-container',
@@ -49,8 +50,14 @@ export class PreviewContainerComponent implements OnInit, OnChanges {
   mountViewer(file: File): ComponentRef<any> {
     const rule = this.viewerService.getViewerRule(file);
     const factory: ComponentFactory<any> = this.cfResolver.resolveComponentFactory(rule.viewer);
+    const injector = Injector.create([
+      {
+        provide: viewerConfig,
+        useValue: rule.config
+      }
+    ], this.injector);
 
-    return factory.create(this.injector);
+    return factory.create(injector);
   }
 
   attach(file: File) {

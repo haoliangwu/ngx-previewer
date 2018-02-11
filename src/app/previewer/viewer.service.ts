@@ -1,7 +1,7 @@
 import { Injectable, Type, Inject } from '@angular/core';
 import { ImgViewerComponent, DefaultViewerComponent } from './index';
 import { BaseViewerComponent } from './base-viewer/base-viewer.component';
-import { ViewerRules, ViewerControlConfig, ViewerRule, DEFAULT_CONFIG } from './model/viewer';
+import { ViewerRules, ViewerConfig, ViewerRule, DEFAULT_CONFIG, ImgViewerConfig } from './model/viewer';
 import { GlobalConfig, globalConfig } from './model/config';
 
 @Injectable()
@@ -22,8 +22,9 @@ export class ViewerService {
       config: {
         zoom: false,
         printable: false,
-        draggable: false
-      }
+        draggable: false,
+        autoFit: true
+      } as ImgViewerConfig
     }
   };
 
@@ -55,15 +56,15 @@ export class ViewerService {
     return this.extRules.other;
   }
 
-  registerExtRule<T extends BaseViewerComponent>(ext: string, viewer: Type<T>, config: ViewerControlConfig = DEFAULT_CONFIG) {
+  registerExtRule<T extends BaseViewerComponent>(ext: string, viewer: Type<T>, config: ViewerConfig = DEFAULT_CONFIG) {
     this.registerRule<T>(ext, viewer, config, true);
   }
 
-  registerTypeRule<T extends BaseViewerComponent>(type: string, viewer: Type<T>, config: ViewerControlConfig = DEFAULT_CONFIG) {
+  registerTypeRule<T extends BaseViewerComponent>(type: string, viewer: Type<T>, config: ViewerConfig = DEFAULT_CONFIG) {
     this.registerRule<T>(type, viewer, config, false);
   }
 
-  private registerRule<T extends BaseViewerComponent>(extOrType: string, viewer: Type<T>, config: ViewerControlConfig, isExt = true) {
+  private registerRule<T extends BaseViewerComponent>(extOrType: string, viewer: Type<T>, config: ViewerConfig, isExt = true) {
     if (isExt) {
       this.extRules[extOrType] = { viewer, config };
     } else {
