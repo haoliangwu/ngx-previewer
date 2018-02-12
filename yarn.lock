@@ -5150,8 +5150,8 @@ ng-zorro-antd@^0.6.14:
     tslib "^1.7.1"
 
 ngx-loading-mask@^0.5.1:
-  version "0.5.1"
-  resolved "http://registry.npm.taobao.org/ngx-loading-mask/download/ngx-loading-mask-0.5.1.tgz#f2da041085140e97fad8833183cacd8169feec48"
+  version "0.5.2"
+  resolved "http://registry.npm.taobao.org/ngx-loading-mask/download/ngx-loading-mask-0.5.2.tgz#75b08a81a29168012ea5872b4fb38c307bb5a465"
   dependencies:
     "@angular/animations" "^5.0.0"
     "@angular/cdk" "^5.1.1"
