@@ -12,6 +12,7 @@ import { globalConfig } from './model/config';
 import { NativeAudioViewerComponent } from './audio-viewer/native-audio-viewer.component';
 
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
+import { NativeVideoViewerComponent } from './video-viewer/native-video-viewer.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { SafeUrlPipe } from './pipes/safe-url.pipe';
     PreviewContainerComponent,
     DefaultViewerComponent,
     NativeAudioViewerComponent,
-    SafeUrlPipe
+    SafeUrlPipe,
+    NativeVideoViewerComponent
   ],
   exports: [
     PreviewContainerComponent

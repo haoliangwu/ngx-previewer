@@ -34,6 +34,15 @@ export class ReaderService {
     this.fileReader.readAsText(file, encoding);
   }
 
+  createObjectURL(file: File) {
+    this.currentFile = file;
+    return URL.createObjectURL(file);
+  }
+
+  revokeObjectURL(url: string) {
+    return URL.revokeObjectURL(url);
+  }
+
   onAbort() {
     return fromEvent<ProgressEvent>(this.fileReader, 'abort');
   }

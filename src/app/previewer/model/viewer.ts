@@ -29,3 +29,7 @@ export interface ImgViewerConfig extends ViewerConfig {
 export interface AudioViewerConfig extends ViewerConfig {
   autoPlay: boolean;
 }
+
+export interface VideoViewerConfig extends ViewerConfig {
+  autoPlay: boolean;
+}

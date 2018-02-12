@@ -1,12 +1,14 @@
 import { Injectable, Type, Inject } from '@angular/core';
 import { ImgViewerComponent, DefaultViewerComponent } from './index';
 import { BaseViewerComponent } from './base-viewer/base-viewer.component';
-import { ViewerRules, ViewerConfig, ViewerRule, DEFAULT_CONFIG, ImgViewerConfig, AudioViewerConfig } from './model/viewer';
+import { ViewerRules, ViewerConfig, ViewerRule, DEFAULT_CONFIG, ImgViewerConfig, AudioViewerConfig, VideoViewerConfig } from './model/viewer';
 import { GlobalConfig, globalConfig } from './model/config';
 import { NativeAudioViewerComponent } from './audio-viewer/native-audio-viewer.component';
+import { NativeVideoViewerComponent } from './video-viewer/native-video-viewer.component';
 
 @Injectable()
 export class ViewerService {
+  // default ext rules
   private extRules: ViewerRules<BaseViewerComponent> = {
     other: {
       viewer: DefaultViewerComponent,
@@ -17,6 +19,8 @@ export class ViewerService {
       }
     }
   };
+
+  // default mini-type rules
   private typeRules: ViewerRules<BaseViewerComponent> = {
     img: {
       viewer: ImgViewerComponent,
@@ -27,8 +31,14 @@ export class ViewerService {
     audio: {
       viewer: NativeAudioViewerComponent,
       config: {
-       autoPlay: false
+        autoPlay: false
       } as AudioViewerConfig
+    },
+    video: {
+      viewer: NativeVideoViewerComponent,
+      config: {
+        autoPlay: false
+      } as VideoViewerConfig
     }
   };
 
@@ -57,6 +67,10 @@ export class ViewerService {
 
       if (this.isAudio(file)) {
         return this.typeRules.audio;
+      }
+
+      if (this.isVideo(file)) {
+        return this.typeRules.video;
       }
     }
 
@@ -90,5 +104,9 @@ export class ViewerService {
 
   private isAudio(file: File) {
     return file.type.match('audio.*');
+  }
+
+  private isVideo(file: File) {
+    return file.type.match('video.*');
   }
 }
