@@ -84,4 +84,8 @@ export class ReaderService {
   onImageLoad() {
     return fromEvent<Event>(this.img, 'load');
   }
+
+  onImageError() {
+    return fromEvent<Event>(this.img, 'error');
+  }
 }
