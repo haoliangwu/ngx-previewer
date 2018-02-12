@@ -6,6 +6,7 @@ import { fromEvent } from 'rxjs/observable/fromEvent';
 import { Subscription } from 'rxjs/Subscription';
 import { viewerConfig } from '../model/config';
 import { AudioViewerConfig } from '../model/viewer';
+import { ViewerService } from '../viewer.service';
 
 @Component({
   selector: 'ngx-native-audio-viewer',
@@ -20,9 +21,10 @@ export class NativeAudioViewerComponent extends BaseViewerComponent implements O
 
   constructor(
     protected readerService: ReaderService,
+    protected viewerService: ViewerService,
     @Inject(viewerConfig) protected config: AudioViewerConfig
   ) {
-    super();
+    super(viewerService);
   }
 
   ngOnInit() {

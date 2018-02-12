@@ -8,6 +8,7 @@ import { ReaderService } from '../reader.service';
 import { viewerConfig } from '../model/config';
 import { ImgViewerConfig } from '../model/viewer';
 import { geometricScaling, alignCenter } from '../utils/calc';
+import { ViewerService } from '../viewer.service';
 
 @Component({
   selector: 'ngx-img-viewer',
@@ -26,9 +27,10 @@ export class ImgViewerComponent extends BaseViewerComponent implements AfterView
     private containerComp: PreviewContainerComponent,
     private renderer2: Renderer2,
     protected readerService: ReaderService,
+    protected viewerService: ViewerService,
     @Inject(viewerConfig) protected config: ImgViewerConfig
   ) {
-    super();
+    super(viewerService);
 
     this.render = this.render.bind(this);
   }
@@ -78,6 +80,11 @@ export class ImgViewerComponent extends BaseViewerComponent implements AfterView
       this.renderer2.setStyle(this.img, 'width', `${sw}px`);
       this.renderer2.setStyle(this.img, 'height', `${sh}px`);
     }
+
+    this.emitViewerInfo<ImgViewerConfig>({
+      config: this.config,
+      file: this.readerService.currentFile
+    });
   }
 
   private isGif(file: File) {

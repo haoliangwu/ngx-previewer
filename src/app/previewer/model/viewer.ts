@@ -13,6 +13,11 @@ export const DEFAULT_CONFIG: ViewerConfig = {
   draggable: false
 };
 
+export interface ViewerInfo<C extends ViewerConfig> {
+  file: File;
+  config: C;
+}
+
 export interface ViewerRule<T extends BaseViewerComponent> {
   viewer: Type<T>;
   config?: ViewerConfig;

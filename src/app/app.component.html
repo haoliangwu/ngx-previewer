@@ -18,6 +18,9 @@
       <button nz-button [nzType]="'default'" (click)="handleClick(fileInput)">
         <span>Upload File and Preview</span>
       </button>
+      <div class="viewer-info" *ngIf="file">
+        <span>{{file.name}}</span>
+      </div>
       <div class="previewer-wrapper" [ngxLoadingMask]="'preview'">
         <ngx-preview-container [file]="file"></ngx-preview-container>
       </div>

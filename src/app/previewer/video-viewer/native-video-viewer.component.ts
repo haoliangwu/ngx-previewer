@@ -5,6 +5,7 @@ import { VideoViewerConfig } from '../model/viewer';
 import { viewerConfig } from '../model/config';
 import { ReaderService } from '../reader.service';
 import { fromEvent } from 'rxjs/observable/fromEvent';
+import { ViewerService } from '../viewer.service';
 
 @Component({
   selector: 'ngx-native-video-viewer',
@@ -19,9 +20,10 @@ export class NativeVideoViewerComponent extends BaseViewerComponent implements O
 
   constructor(
     protected readerService: ReaderService,
+    protected viewerService: ViewerService,
     @Inject(viewerConfig) protected config: VideoViewerConfig
   ) {
-    super();
+    super(viewerService);
   }
 
   ngOnInit() {

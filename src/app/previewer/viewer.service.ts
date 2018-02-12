@@ -1,13 +1,15 @@
 import { Injectable, Type, Inject } from '@angular/core';
-import { ImgViewerComponent, DefaultViewerComponent } from './index';
+import { ImgViewerComponent, DefaultViewerComponent, NativeAudioViewerComponent, NativeVideoViewerComponent } from './index';
 import { BaseViewerComponent } from './base-viewer/base-viewer.component';
-import { ViewerRules, ViewerConfig, ViewerRule, DEFAULT_CONFIG, ImgViewerConfig, AudioViewerConfig, VideoViewerConfig } from './model/viewer';
+import { ViewerRules, ViewerConfig, ViewerRule, DEFAULT_CONFIG, ImgViewerConfig, AudioViewerConfig, VideoViewerConfig, ViewerInfo } from './model/viewer';
 import { GlobalConfig, globalConfig } from './model/config';
-import { NativeAudioViewerComponent } from './audio-viewer/native-audio-viewer.component';
-import { NativeVideoViewerComponent } from './video-viewer/native-video-viewer.component';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ViewerService {
+  viewerInfo$: Subject<ViewerInfo<ViewerConfig>> = new Subject();
+
   // default ext rules
   private extRules: ViewerRules<BaseViewerComponent> = {
     other: {
@@ -37,6 +39,7 @@ export class ViewerService {
     video: {
       viewer: NativeVideoViewerComponent,
       config: {
+        zoom: true,
         autoPlay: false
       } as VideoViewerConfig
     }
@@ -76,6 +79,10 @@ export class ViewerService {
 
     // 如果都没有找到，则直接返回 default viewer
     return this.extRules.other;
+  }
+
+  getViewerInfo(): Observable<ViewerInfo<ViewerConfig>> {
+    return this.viewerInfo$.asObservable();
   }
 
   registerExtRule<T extends BaseViewerComponent>(ext: string, viewer: Type<T>, config: ViewerConfig = DEFAULT_CONFIG) {

@@ -2,12 +2,22 @@ import { Component, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { ReaderService } from '../reader.service';
+import { ViewerService } from '../viewer.service';
+import { ViewerInfo, ViewerConfig } from '../model/viewer';
 
 @Component({
   selector: 'ngx-base-viewer',
   template: ''
 })
 export abstract class BaseViewerComponent {
+  constructor(
+    protected viewService: ViewerService
+  ) { }
+
   abstract loadFile(file: File): void;
   abstract render(data: string | ArrayBuffer): void;
+
+  protected emitViewerInfo<C extends ViewerConfig>(info: ViewerInfo<C>) {
+    this.viewService.viewerInfo$.next(info);
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseViewerComponent } from '../base-viewer/base-viewer.component';
+import { ViewerService } from '../viewer.service';
 
 @Component({
   selector: 'ngx-default-viewer',
@@ -7,6 +8,12 @@ import { BaseViewerComponent } from '../base-viewer/base-viewer.component';
   styleUrls: ['./default-viewer.component.scss']
 })
 export class DefaultViewerComponent extends BaseViewerComponent {
+  constructor(
+    protected viewerService: ViewerService,
+  ) {
+    super(viewerService);
+  }
+
   loadFile(file: File): void {
   }
 

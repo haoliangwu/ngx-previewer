@@ -28,5 +28,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // this.viewerService.registerTypeRule('img', DefaultViewerComponent);
+    // this.viewerService.getViewerInfo()
+    //   .subscribe(e => {
+    //     console.log(e);
+    //   });
   }
 }
