@@ -20,13 +20,13 @@ export class ImgViewerComponent extends BaseViewerComponent implements AfterView
   @ViewChild('viewer') private viewerRef: ElementRef;
   private canvas: HTMLCanvasElement;
   private img: HTMLImageElement;
-  private useImgTag = false;
+  useImgTag = false;
 
   constructor(
     @Inject(forwardRef(() => PreviewContainerComponent))
     private containerComp: PreviewContainerComponent,
     private renderer2: Renderer2,
-    protected readerService: ReaderService,
+    public readerService: ReaderService,
     @Inject(forwardRef(() => ViewerService)) protected viewerService: ViewerService,
     @Inject(viewerConfig) protected config: ImgViewerConfig
   ) {

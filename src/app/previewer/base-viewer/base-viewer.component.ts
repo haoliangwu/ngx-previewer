@@ -5,10 +5,6 @@ import { ReaderService } from '../reader.service';
 import { ViewerService } from '../viewer.service';
 import { ViewerInfo, ViewerConfig } from '../model/viewer';
 
-@Component({
-  selector: 'ngx-base-viewer',
-  template: ''
-})
 export abstract class BaseViewerComponent {
   constructor(
     @Inject(forwardRef(() => ViewerService)) protected viewService: ViewerService

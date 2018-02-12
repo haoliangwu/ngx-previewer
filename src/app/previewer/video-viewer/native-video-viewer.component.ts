@@ -19,7 +19,7 @@ export class NativeVideoViewerComponent extends BaseViewerComponent implements O
   @ViewChild('player', { read: ElementRef }) protected player: ElementRef;
 
   constructor(
-    protected readerService: ReaderService,
+    public readerService: ReaderService,
     @Inject(forwardRef(() => ViewerService)) protected viewerService: ViewerService,
     @Inject(viewerConfig) protected config: VideoViewerConfig
   ) {
