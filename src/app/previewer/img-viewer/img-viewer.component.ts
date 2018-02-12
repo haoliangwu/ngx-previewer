@@ -6,7 +6,7 @@ import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
 import { PreviewContainerComponent } from '../preview-container.component';
 import { ReaderService } from '../reader.service';
 import { viewerConfig } from '../model/config';
-import { ImgViewerConfig } from '../model/viewer';
+import { ImgViewerConfig, ViewerStatus } from '../model/viewer';
 import { geometricScaling, alignCenter } from '../utils/calc';
 import { ViewerService } from '../viewer.service';
 
@@ -56,6 +56,12 @@ export class ImgViewerComponent extends BaseViewerComponent implements AfterView
       this.useImgTag = true;
     }
 
+    this.emitViewerInfo<ImgViewerConfig>({
+      config: this.config,
+      file: file,
+      status: ViewerStatus.PENDING
+    });
+
     this.readerService.readAsImg(file);
   }
 
@@ -83,7 +89,8 @@ export class ImgViewerComponent extends BaseViewerComponent implements AfterView
 
     this.emitViewerInfo<ImgViewerConfig>({
       config: this.config,
-      file: this.readerService.currentFile
+      file: this.readerService.currentFile,
+      status: ViewerStatus.DONE
     });
   }
 

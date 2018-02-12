@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ViewerService, DefaultViewerComponent, ReaderService } from './previewer/index';
 import { LoadingMaskService } from 'ngx-loading-mask';
 import { ElementRef } from '@angular/core/src/linker/element_ref';
+import { ViewerStatus } from './previewer/model/viewer';
 
 @Component({
   selector: 'ngx-root',
@@ -28,9 +29,20 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // this.viewerService.registerTypeRule('img', DefaultViewerComponent);
-    // this.viewerService.getViewerInfo()
-    //   .subscribe(e => {
-    //     console.log(e);
-    //   });
+    this.viewerService.getViewerInfo()
+      .subscribe(viewInfo => {
+        const { status } = viewInfo;
+
+        switch (status) {
+          case ViewerStatus.PENDING:
+            this.loadingMaskService.showGroup('preview');
+            break;
+          case ViewerStatus.DONE:
+            this.loadingMaskService.hideGroup('preview');
+            break;
+        }
+      }, err => {
+        this.loadingMaskService.hideGroupError('preview', err);
+      });
   }
 }

@@ -1,6 +1,11 @@
 import { BaseViewerComponent } from '../base-viewer/base-viewer.component';
 import { Type } from '@angular/core';
 
+export enum ViewerStatus {
+  PENDING = 'pending',
+  DONE = 'done'
+}
+
 export interface ViewerConfig {
   zoom?: boolean;
   printable?: boolean;
@@ -16,6 +21,7 @@ export const DEFAULT_CONFIG: ViewerConfig = {
 export interface ViewerInfo<C extends ViewerConfig> {
   file: File;
   config: C;
+  status: ViewerStatus;
 }
 
 export interface ViewerRule<T extends BaseViewerComponent> {
