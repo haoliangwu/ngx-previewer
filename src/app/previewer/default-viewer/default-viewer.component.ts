@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, forwardRef, Inject } from '@angular/core';
 import { BaseViewerComponent } from '../base-viewer/base-viewer.component';
 import { ViewerService } from '../viewer.service';
 
@@ -9,7 +9,7 @@ import { ViewerService } from '../viewer.service';
 })
 export class DefaultViewerComponent extends BaseViewerComponent {
   constructor(
-    protected viewerService: ViewerService,
+    @Inject(forwardRef(() => ViewerService)) protected viewerService: ViewerService,
   ) {
     super(viewerService);
   }

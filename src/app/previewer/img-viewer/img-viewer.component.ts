@@ -27,7 +27,7 @@ export class ImgViewerComponent extends BaseViewerComponent implements AfterView
     private containerComp: PreviewContainerComponent,
     private renderer2: Renderer2,
     protected readerService: ReaderService,
-    protected viewerService: ViewerService,
+    @Inject(forwardRef(() => ViewerService)) protected viewerService: ViewerService,
     @Inject(viewerConfig) protected config: ImgViewerConfig
   ) {
     super(viewerService);

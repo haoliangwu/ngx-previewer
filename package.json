@@ -8,9 +8,27 @@
     "build": "ng build --prod",
     "test": "jest",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "package": "ng-packagr -p package.json",
+    "deploy:doc": "ng build --prod --deploy-url http://littlelyon.com/ngx-previewer/ && gulp deploy"
   },
-  "private": true,
+  "private": false,
+  "jest": {
+    "preset": "jest-preset-angular",
+    "roots": [
+      "<rootDir>/src/"
+    ],
+    "setupTestFrameworkScriptFile": "<rootDir>/src/setup-jest.ts"
+  },
+  "ngPackage": {
+    "lib": {
+      "entryFile": "src/app/previewer/index.ts",
+      "languageLevel": [
+        "dom",
+        "es2017"
+      ]
+    }
+  },
   "dependencies": {
     "@angular-devkit/core": "^0.3.1",
     "@angular/animations": "^5.0.0",
@@ -35,6 +53,8 @@
     "@types/jest": "^22.1.2",
     "@types/node": "~6.0.60",
     "codelyzer": "^4.0.1",
+    "gulp": "^3.9.1",
+    "gulp-gh-pages": "^0.5.4",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "jest": "^22.2.2",
@@ -45,6 +65,7 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "ng-packagr": "^2.0.0",
     "ng-zorro-antd": "^0.6.14",
     "ngx-loading-mask": "^0.5.1",
     "protractor": "~5.1.2",
@@ -52,11 +73,15 @@
     "tslint": "~5.7.0",
     "typescript": "~2.4.2"
   },
-  "jest": {
-    "preset": "jest-preset-angular",
-    "roots": [
-      "<rootDir>/src/"
-    ],
-    "setupTestFrameworkScriptFile": "<rootDir>/src/setup-jest.ts"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/haoliangwu/ngx-previewer"
+  },
+  "bugs": {
+    "url": "https://github.com/haoliangwu/ngx-previewer/issues"
+  },
+  "author": {
+    "name": "haoliangwu",
+    "url": "https://github.com/haoliangwu"
   }
 }

@@ -4,7 +4,6 @@ import { PreviewContainerComponent } from './preview-container.component';
 import { ImgViewerComponent } from './img-viewer/img-viewer.component';
 import { DefaultViewerComponent } from './default-viewer/default-viewer.component';
 import { ReaderService } from './reader.service';
-import { DEFAULT_VIEWER_COMPS } from './index';
 import { ViewerService } from './viewer.service';
 import { GlobalConfig } from './model/config';
 import { BaseViewerComponent } from './base-viewer/base-viewer.component';
@@ -13,6 +12,13 @@ import { NativeAudioViewerComponent } from './audio-viewer/native-audio-viewer.c
 
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
 import { NativeVideoViewerComponent } from './video-viewer/native-video-viewer.component';
+
+export const DEFAULT_VIEWER_COMPS = [
+  DefaultViewerComponent,
+  ImgViewerComponent,
+  NativeAudioViewerComponent,
+  NativeVideoViewerComponent
+];
 
 @NgModule({
   imports: [

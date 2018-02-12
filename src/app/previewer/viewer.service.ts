@@ -1,10 +1,14 @@
 import { Injectable, Type, Inject } from '@angular/core';
-import { ImgViewerComponent, DefaultViewerComponent, NativeAudioViewerComponent, NativeVideoViewerComponent } from './index';
 import { BaseViewerComponent } from './base-viewer/base-viewer.component';
 import { ViewerRules, ViewerConfig, ViewerRule, DEFAULT_CONFIG, ImgViewerConfig, AudioViewerConfig, VideoViewerConfig, ViewerInfo } from './model/viewer';
 import { GlobalConfig, globalConfig } from './model/config';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+
+import { DefaultViewerComponent } from './default-viewer/default-viewer.component';
+import { ImgViewerComponent } from './img-viewer/img-viewer.component';
+import { NativeAudioViewerComponent } from './audio-viewer/native-audio-viewer.component';
+import { NativeVideoViewerComponent } from './video-viewer/native-video-viewer.component';
 
 @Injectable()
 export class ViewerService {

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ElementRef, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, Inject, forwardRef } from '@angular/core';
 import { BaseViewerComponent } from '../base-viewer/base-viewer.component';
 import { Observable } from 'rxjs/Observable';
 import { VideoViewerConfig } from '../model/viewer';
@@ -20,7 +20,7 @@ export class NativeVideoViewerComponent extends BaseViewerComponent implements O
 
   constructor(
     protected readerService: ReaderService,
-    protected viewerService: ViewerService,
+    @Inject(forwardRef(() => ViewerService)) protected viewerService: ViewerService,
     @Inject(viewerConfig) protected config: VideoViewerConfig
   ) {
     super(viewerService);
