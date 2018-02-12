@@ -1,1 +1,4 @@
-<canvas #viewer></canvas>
+<canvas #viewer *ngIf="!useImgTag; else imgTpl"></canvas>
+<ng-template #imgTpl>
+  <img #viewer [attr.src]="readerService.objectURL | safeUrl">
+</ng-template>

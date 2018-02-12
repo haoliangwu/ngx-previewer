@@ -1,10 +1,9 @@
-import { Component, Host, Inject, ElementRef, ViewChild, forwardRef, OnInit } from '@angular/core';
+import { Component, Host, Inject, ElementRef, ViewChild, forwardRef, AfterViewInit, OnDestroy, Renderer2 } from '@angular/core';
 import { BaseViewerComponent } from '../base-viewer/base-viewer.component';
 import { Subscription } from 'rxjs/Subscription';
 import { tap, map } from 'rxjs/operators';
 import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
 import { PreviewContainerComponent } from '../preview-container.component';
-import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { ReaderService } from '../reader.service';
 import { viewerConfig } from '../model/config';
 import { ImgViewerConfig } from '../model/viewer';
@@ -15,14 +14,17 @@ import { geometricScaling, alignCenter } from '../utils/calc';
   templateUrl: './img-viewer.component.html',
   styleUrls: ['./img-viewer.component.scss']
 })
-export class ImgViewerComponent extends BaseViewerComponent implements OnInit, OnDestroy {
+export class ImgViewerComponent extends BaseViewerComponent implements AfterViewInit, OnDestroy {
   private read$$: Subscription;
-  @ViewChild('viewer') private canvasRef: ElementRef;
+  @ViewChild('viewer') private viewerRef: ElementRef;
   private canvas: HTMLCanvasElement;
+  private img: HTMLImageElement;
+  private useImgTag = false;
 
   constructor(
     @Inject(forwardRef(() => PreviewContainerComponent))
     private containerComp: PreviewContainerComponent,
+    private renderer2: Renderer2,
     protected readerService: ReaderService,
     @Inject(viewerConfig) protected config: ImgViewerConfig
   ) {
@@ -31,12 +33,16 @@ export class ImgViewerComponent extends BaseViewerComponent implements OnInit, O
     this.render = this.render.bind(this);
   }
 
-  ngOnInit() {
-    this.canvas = this.canvasRef.nativeElement;
-    this.canvas.width = this.containerComp.width;
-    this.canvas.height = this.containerComp.height;
+  ngAfterViewInit() {
+    if (!this.useImgTag) {
+      this.canvas = this.viewerRef.nativeElement;
+      this.canvas.width = this.containerComp.width;
+      this.canvas.height = this.containerComp.height;
+    } else {
+      this.img = this.viewerRef.nativeElement;
+    }
 
-    this.read$$ = this.readerService.onLoad().subscribe(this.render);
+    this.read$$ = this.readerService.onImageLoad().subscribe(this.render);
   }
 
   ngOnDestroy() {
@@ -44,30 +50,37 @@ export class ImgViewerComponent extends BaseViewerComponent implements OnInit, O
   }
 
   loadFile(file: File) {
-    this.readerService.readAsDataURL(file);
+    if (this.isGif(file)) {
+      this.useImgTag = true;
+    }
+
+    this.readerService.readAsImg(file);
   }
 
-  render(data: string) {
-    const ctx: CanvasRenderingContext2D = this.canvas.getContext('2d');
+  render() {
+    let sw, sh;
+    if (this.config.autoFit) {
+      // if autoFit = true, should adjust image size based on canvas
+      [sw, sh] = geometricScaling(this.readerService.img.width, this.readerService.img.height, this.containerComp.width, this.containerComp.height);
+    }
 
-    ctx.restore();
+    if (!this.useImgTag) {
+      const ctx: CanvasRenderingContext2D = this.canvas.getContext('2d');
 
-    const img = new Image();
+      ctx.restore();
 
-    img.src = data;
-
-    // TODO 这里需要根据容器和图片的宽高比进行缩放
-    img.onload = () => {
-      let sw, sh;
       let x = 0, y = 0;
 
-      // if autoFit = true, should adjust image size based on canvas
-      if (this.config.autoFit) {
-        [sw, sh] = geometricScaling(img.width, img.height, this.canvas.width, this.canvas.height);
-        [x, y] = alignCenter(sw, sh, this.canvas.width, this.canvas.height);
-      }
+      [x, y] = alignCenter(sw, sh, this.canvas.width, this.canvas.height);
 
-      ctx.drawImage(img, x, y, sw, sh);
-    };
+      ctx.drawImage(this.readerService.img, x, y, sw, sh);
+    } else {
+      this.renderer2.setStyle(this.img, 'width', `${sw}px`);
+      this.renderer2.setStyle(this.img, 'height', `${sh}px`);
+    }
+  }
+
+  private isGif(file: File) {
+    return file.type.match('image/gif');
   }
 }
