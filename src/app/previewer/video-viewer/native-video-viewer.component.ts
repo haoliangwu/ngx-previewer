@@ -12,7 +12,6 @@ import { fromEvent } from 'rxjs/observable/fromEvent';
   styleUrls: ['./native-video-viewer.component.scss']
 })
 export class NativeVideoViewerComponent extends BaseViewerComponent implements OnInit, OnDestroy {
-  private videoURL: string;
   private canplay$: Observable<Event>;
   private $player: HTMLVideoElement;
 
@@ -36,11 +35,11 @@ export class NativeVideoViewerComponent extends BaseViewerComponent implements O
   }
 
   ngOnDestroy() {
-    this.readerService.revokeObjectURL(this.videoURL);
+    this.readerService.revokeObjectURL();
   }
 
   loadFile(file: File): void {
-    this.videoURL = this.readerService.createObjectURL(file);
+    this.readerService.createObjectURL(file);
   }
 
   render(): void {

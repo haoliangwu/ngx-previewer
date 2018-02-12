@@ -1,4 +1,4 @@
 <video #player controls>
-  <source [attr.src]="videoURL | safeUrl" [attr.type]="readerService.currentFile.type">
+  <source [attr.src]="readerService.objectURL | safeUrl" [attr.type]="readerService.currentFile.type">
   <p>Your browser doesn't support HTML5 video.
 </video>

@@ -13,7 +13,6 @@ import { AudioViewerConfig } from '../model/viewer';
   styleUrls: ['./native-audio-viewer.component.scss']
 })
 export class NativeAudioViewerComponent extends BaseViewerComponent implements OnInit, OnDestroy {
-  private audioURL: string;
   private canplay$: Observable<Event>;
   private $player: HTMLAudioElement;
 
@@ -37,11 +36,11 @@ export class NativeAudioViewerComponent extends BaseViewerComponent implements O
   }
 
   ngOnDestroy() {
-    this.readerService.revokeObjectURL(this.audioURL);
+    this.readerService.revokeObjectURL();
   }
 
   loadFile(file: File): void {
-    this.audioURL = this.readerService.createObjectURL(file);
+    this.readerService.createObjectURL(file);
   }
 
   render(): void {
