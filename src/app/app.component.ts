@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ViewerService, DefaultViewerComponent, ReaderService } from './previewer/index';
 import { LoadingMaskService } from 'ngx-loading-mask';
 import { ElementRef } from '@angular/core/src/linker/element_ref';
 import { ViewerStatus } from './previewer/model/viewer';
+import { ViewerService } from './previewer/viewer.service';
+import { ReaderService } from './previewer/reader.service';
 
 @Component({
   selector: 'ngx-root',
