@@ -12,7 +12,7 @@ import { ViewerService } from '../../viewer.service';
   templateUrl: './native-video-viewer.component.html',
   styleUrls: ['./native-video-viewer.component.scss']
 })
-export class NativeVideoViewerComponent extends BaseViewerComponent implements OnInit, OnDestroy {
+export class NativeVideoViewerComponent extends BaseViewerComponent<VideoViewerConfig> implements OnInit, OnDestroy {
   private canplay$: Observable<Event>;
   private $player: HTMLVideoElement;
 
@@ -23,7 +23,7 @@ export class NativeVideoViewerComponent extends BaseViewerComponent implements O
     @Inject(forwardRef(() => ViewerService)) protected viewerService: ViewerService,
     @Inject(viewerConfig) protected config: VideoViewerConfig
   ) {
-    super(readerService, viewerService);
+    super(config, readerService, viewerService);
   }
 
   ngOnInit() {

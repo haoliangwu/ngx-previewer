@@ -13,7 +13,7 @@ export class DefaultViewerComponent extends BaseViewerComponent {
     public readerService: ReaderService,
     @Inject(forwardRef(() => ViewerService)) protected viewerService: ViewerService,
   ) {
-    super(readerService, viewerService);
+    super({}, readerService, viewerService);
   }
 
   loadFile(file: File): void {

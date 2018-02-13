@@ -13,7 +13,7 @@ import { ViewerService } from '../../viewer.service';
   templateUrl: './native-audio-viewer.component.html',
   styleUrls: ['./native-audio-viewer.component.scss']
 })
-export class NativeAudioViewerComponent extends BaseViewerComponent implements OnInit, OnDestroy {
+export class NativeAudioViewerComponent extends BaseViewerComponent<AudioViewerConfig> implements OnInit, OnDestroy {
   private canplay$: Observable<Event>;
   private $player: HTMLAudioElement;
 
@@ -24,7 +24,7 @@ export class NativeAudioViewerComponent extends BaseViewerComponent implements O
     @Inject(forwardRef(() => ViewerService)) protected viewerService: ViewerService,
     @Inject(viewerConfig) protected config: AudioViewerConfig
   ) {
-    super(readerService, viewerService);
+    super(config, readerService, viewerService);
   }
 
   ngOnInit() {

@@ -17,7 +17,7 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./pdf-viewer.component.scss'],
   providers: [PdfService]
 })
-export class PdfViewerComponent extends BaseViewerComponent implements OnInit, OnDestroy, AfterViewInit {
+export class PdfViewerComponent extends BaseViewerComponent<PdfViewerConfig> implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('viewer') private viewerRef: ElementRef;
   private canvas: HTMLCanvasElement;
 
@@ -28,7 +28,7 @@ export class PdfViewerComponent extends BaseViewerComponent implements OnInit, O
     @Inject(viewerConfig) protected config: PdfViewerConfig,
     public pdfService: PdfService
   ) {
-    super(readerService, viewerService);
+    super(config, readerService, viewerService);
   }
 
   ngOnInit() {
@@ -43,11 +43,7 @@ export class PdfViewerComponent extends BaseViewerComponent implements OnInit, O
       switchMap(({ page, context }) => this.render(page, context)),
       tap(() => {
         // TODO 应当抽离为独立的方法
-        this.emitViewerInfo<PdfViewerConfig>({
-          config: this.config,
-          file: this.readerService.currentFile,
-          status: ViewerStatus.DONE
-        });
+        this.viewerInDone();
       })
     ).subscribe();
 
@@ -93,12 +89,7 @@ export class PdfViewerComponent extends BaseViewerComponent implements OnInit, O
   }
 
   loadPage(page: number) {
-    this.emitViewerInfo<PdfViewerConfig>({
-      config: this.config,
-      file: this.readerService.currentFile,
-      status: ViewerStatus.PENDING
-    });
-
+    this.viewerInPending();
     this.pdfService.getPage(page);
   }
 }

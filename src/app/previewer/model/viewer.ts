@@ -24,12 +24,12 @@ export interface ViewerInfo<C extends ViewerConfig> {
   status: ViewerStatus;
 }
 
-export interface ViewerRule<T extends BaseViewerComponent> {
+export interface ViewerRule<T extends BaseViewerComponent<ViewerConfig>> {
   viewer: Type<T>;
   config?: ViewerConfig;
 }
 
-export interface ViewerRules<T extends BaseViewerComponent> {
+export interface ViewerRules<T extends BaseViewerComponent<ViewerConfig>> {
   [extOrType: string]: ViewerRule<T>;
 }
 

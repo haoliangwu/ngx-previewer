@@ -3,10 +3,11 @@ import { Observable } from 'rxjs/Observable';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { ReaderService } from '../../reader.service';
 import { ViewerService } from '../../viewer.service';
-import { ViewerInfo, ViewerConfig } from '../../model/viewer';
+import { ViewerInfo, ViewerConfig, ViewerStatus } from '../../model/viewer';
 
-export abstract class BaseViewerComponent {
+export abstract class BaseViewerComponent<C extends ViewerConfig = {}> {
   constructor(
+    protected config: C,
     public readerService: ReaderService,
     @Inject(forwardRef(() => ViewerService)) public viewService: ViewerService
   ) { }
@@ -14,7 +15,23 @@ export abstract class BaseViewerComponent {
   abstract loadFile(file: File): any;
   abstract render(...args: any[]): any;
 
-  protected emitViewerInfo<C extends ViewerConfig>(info: ViewerInfo<C>) {
+  private emitViewerInfo(info: ViewerInfo<C>) {
     this.viewService.viewerInfo$.next(info);
+  }
+
+  protected viewerInPending(config: C = this.config, file = this.readerService.currentFile) {
+    this.emitViewerInfo({
+      config,
+      file: this.readerService.currentFile,
+      status: ViewerStatus.PENDING
+    });
+  }
+
+  protected viewerInDone(config: C = this.config, file = this.readerService.currentFile) {
+    this.emitViewerInfo({
+      config,
+      file: this.readerService.currentFile,
+      status: ViewerStatus.DONE
+    });
   }
 }

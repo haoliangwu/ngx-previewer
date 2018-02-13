@@ -15,7 +15,7 @@ import { ViewerService } from '../../viewer.service';
   templateUrl: './img-viewer.component.html',
   styleUrls: ['./img-viewer.component.scss']
 })
-export class ImgViewerComponent extends BaseViewerComponent implements AfterViewInit, OnDestroy {
+export class ImgViewerComponent extends BaseViewerComponent<ImgViewerConfig> implements AfterViewInit, OnDestroy {
   private read$$: Subscription;
   @ViewChild('viewer') private viewerRef: ElementRef;
   private canvas: HTMLCanvasElement;
@@ -30,7 +30,7 @@ export class ImgViewerComponent extends BaseViewerComponent implements AfterView
     @Inject(forwardRef(() => ViewerService)) protected viewerService: ViewerService,
     @Inject(viewerConfig) protected config: ImgViewerConfig
   ) {
-    super(readerService, viewerService);
+    super(config, readerService, viewerService);
 
     this.render = this.render.bind(this);
   }
@@ -56,11 +56,7 @@ export class ImgViewerComponent extends BaseViewerComponent implements AfterView
       this.useImgTag = true;
     }
 
-    this.emitViewerInfo<ImgViewerConfig>({
-      config: this.config,
-      file: file,
-      status: ViewerStatus.PENDING
-    });
+    this.viewerInPending();
 
     this.readerService.readAsImg(file);
   }
@@ -87,11 +83,7 @@ export class ImgViewerComponent extends BaseViewerComponent implements AfterView
       this.renderer2.setStyle(this.img, 'height', `${sh}px`);
     }
 
-    this.emitViewerInfo<ImgViewerConfig>({
-      config: this.config,
-      file: this.readerService.currentFile,
-      status: ViewerStatus.DONE
-    });
+    this.viewerInDone();
   }
 
   private isGif(file: File) {
