@@ -47,8 +47,6 @@ export class PdfViewerComponent extends BaseViewerComponent<PdfViewerConfig> imp
 
   ngAfterViewInit() {
     this.canvas = this.viewerRef.nativeElement;
-    // this.canvas.width = this.containerComp.width;
-    // this.canvas.height = this.containerComp.height;
   }
 
   ngOnDestroy() {
@@ -67,12 +65,7 @@ export class PdfViewerComponent extends BaseViewerComponent<PdfViewerConfig> imp
     let viewport = page.getViewport(scale);
 
     if (this.config.autoFit) {
-      const scaleX = this.containerComp.width / viewport.width;
-      const scaleY = this.containerComp.height / viewport.height;
-
-      scale = scaleY > scaleX ? scaleX : scaleY;
-
-      scale = scale > 1 ? scale = 1 : scale;
+      scale = this.pdfService.autoFitViewportScale(viewport, [this.containerComp.width, this.containerComp.height]);
 
       viewport = page.getViewport(scale);
     }
@@ -82,7 +75,6 @@ export class PdfViewerComponent extends BaseViewerComponent<PdfViewerConfig> imp
     this.canvas.width = viewport.width;
     this.canvas.height = viewport.height;
 
-    // Render PDF page into canvas context
     const renderContext: RenderContext = {
       canvasContext: context,
       viewport: viewport

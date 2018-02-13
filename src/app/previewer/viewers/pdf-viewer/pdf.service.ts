@@ -39,6 +39,13 @@ export class PdfService {
     return fromPromise(this.renderPage(page, context));
   }
 
+  autoFitViewportScale(viewport: PDFPageViewport, rect: [number, number]): number {
+    const scaleX = rect[0] / viewport.width;
+    const scaleY = rect[1] / viewport.height;
+
+    return scaleY > scaleX ? scaleX > 1 ? 1 : scaleX : scaleY > 1 ? 1 : scaleY;
+  }
+
   private loadDocument(url: string): Promise<PDFDocumentProxy> {
     return new Promise<PDFDocumentProxy>((resolve, reject) => {
       PDFJS.getDocument(url).then(resolve, reject);
