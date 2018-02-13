@@ -30,7 +30,7 @@ export class ImgViewerComponent extends BaseViewerComponent implements AfterView
     @Inject(forwardRef(() => ViewerService)) protected viewerService: ViewerService,
     @Inject(viewerConfig) protected config: ImgViewerConfig
   ) {
-    super(viewerService);
+    super(readerService, viewerService);
 
     this.render = this.render.bind(this);
   }

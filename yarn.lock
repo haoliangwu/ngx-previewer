@@ -216,6 +216,10 @@
   version "6.0.99"
   resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-6.0.99.tgz#3169584cc922a362ec45207c957e04b0c8d8c8f5"
 
+"@types/pdfjs-dist@^0.1.2":
+  version "0.1.2"
+  resolved "http://registry.npm.taobao.org/@types/pdfjs-dist/download/@types/pdfjs-dist-0.1.2.tgz#91a28961916deab21745482bb26242005fb5b7c7"
+
 "@types/q@^0.0.32":
   version "0.0.32"
   resolved "http://registry.npm.taobao.org/@types/q/download/@types/q-0.0.32.tgz#bd284e57c84f1325da702babfc82a5328190c0c5"
@@ -4573,7 +4577,7 @@ loader-runner@^2.3.0:
   version "2.3.0"
   resolved "http://registry.npm.taobao.org/loader-runner/download/loader-runner-2.3.0.tgz#f482aea82d543e07921700d5a46ef26fdac6b8a2"
 
-loader-utils@1.1.0, loader-utils@^1.0.1, loader-utils@^1.0.2, loader-utils@^1.1.0:
+loader-utils@1.1.0, loader-utils@^1.0.0, loader-utils@^1.0.1, loader-utils@^1.0.2, loader-utils@^1.1.0:
   version "1.1.0"
   resolved "http://registry.npm.taobao.org/loader-utils/download/loader-utils-1.1.0.tgz#c98aef488bcceda2ffb5e2de646d6a754429f5cd"
   dependencies:
@@ -5149,7 +5153,7 @@ ng-zorro-antd@^0.6.14:
     moment "^2.18.1"
     tslib "^1.7.1"
 
-ngx-loading-mask@^0.5.1:
+ngx-loading-mask@^0.5.2:
   version "0.5.2"
   resolved "http://registry.npm.taobao.org/ngx-loading-mask/download/ngx-loading-mask-0.5.2.tgz#75b08a81a29168012ea5872b4fb38c307bb5a465"
   dependencies:
@@ -5172,6 +5176,10 @@ no-case@^2.2.0:
   resolved "http://registry.npm.taobao.org/no-case/download/no-case-2.3.2.tgz#60b813396be39b3f1288a4c1ed5d1e7d28b464ac"
   dependencies:
     lower-case "^1.1.1"
+
+node-ensure@^0.0.0:
+  version "0.0.0"
+  resolved "http://registry.npm.taobao.org/node-ensure/download/node-ensure-0.0.0.tgz#ecae764150de99861ec5c810fd5d096b183932a7"
 
 node-forge@0.7.1:
   version "0.7.1"
@@ -5742,6 +5750,13 @@ pbkdf2@^3.0.3:
     ripemd160 "^2.0.1"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
+
+pdfjs-dist@^2.0.359:
+  version "2.0.359"
+  resolved "http://registry.npm.taobao.org/pdfjs-dist/download/pdfjs-dist-2.0.359.tgz#fb755e77af37aa73fa32729ddcb9658f5569be7f"
+  dependencies:
+    node-ensure "^0.0.0"
+    worker-loader "^1.1.0"
 
 performance-now@^0.2.0:
   version "0.2.0"
@@ -8362,6 +8377,13 @@ worker-farm@^1.5.2:
   dependencies:
     errno "^0.1.4"
     xtend "^4.0.1"
+
+worker-loader@^1.1.0:
+  version "1.1.0"
+  resolved "http://registry.npm.taobao.org/worker-loader/download/worker-loader-1.1.0.tgz#8cf21869a07add84d66f821d948d23c1eb98e809"
+  dependencies:
+    loader-utils "^1.0.0"
+    schema-utils "^0.3.0"
 
 wrap-ansi@^2.0.0:
   version "2.1.0"

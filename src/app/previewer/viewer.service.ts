@@ -1,10 +1,10 @@
 import { Injectable, Type, Inject } from '@angular/core';
-import { ViewerRules, ViewerConfig, ViewerRule, DEFAULT_CONFIG, ImgViewerConfig, AudioViewerConfig, VideoViewerConfig, ViewerInfo } from './model/viewer';
+import { ViewerRules, ViewerConfig, ViewerRule, DEFAULT_CONFIG, ImgViewerConfig, AudioViewerConfig, VideoViewerConfig, ViewerInfo, PdfViewerConfig } from './model/viewer';
 import { GlobalConfig, globalConfig } from './model/config';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
-import { DefaultViewerComponent, ImgViewerComponent, NativeAudioViewerComponent, NativeVideoViewerComponent, BaseViewerComponent } from './viewers/index';
+import { DefaultViewerComponent, ImgViewerComponent, NativeAudioViewerComponent, NativeVideoViewerComponent, BaseViewerComponent, PdfViewerComponent } from './viewers/index';
 
 @Injectable()
 export class ViewerService {
@@ -19,6 +19,12 @@ export class ViewerService {
         printable: false,
         draggable: false
       }
+    },
+    pdf: {
+      viewer: PdfViewerComponent,
+      config: {
+        workerSrc: '//mozilla.github.io/pdf.js/build/pdf.worker.js'
+      } as PdfViewerConfig
     }
   };
 
@@ -60,25 +66,25 @@ export class ViewerService {
     const ext = this.getFileExt(file);
 
     // 首先通过扩展名取 viewer
-    const rule = this.extRules[ext];
+    let rule = this.extRules[ext];
 
     // 如果是未注册的扩展名，则使用 mini-type 进行匹配
     if (!rule) {
       if (this.isImage(file)) {
-        return this.typeRules.img;
+        rule = this.typeRules.img;
       }
 
       if (this.isAudio(file)) {
-        return this.typeRules.audio;
+        rule = this.typeRules.audio;
       }
 
       if (this.isVideo(file)) {
-        return this.typeRules.video;
+        rule = this.typeRules.video;
       }
     }
 
     // 如果都没有找到，则直接返回 default viewer
-    return this.extRules.other;
+    return !!rule ? rule : this.extRules.other;
   }
 
   getViewerInfo(): Observable<ViewerInfo<ViewerConfig>> {

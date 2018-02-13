@@ -24,7 +24,7 @@ export class NativeAudioViewerComponent extends BaseViewerComponent implements O
     @Inject(forwardRef(() => ViewerService)) protected viewerService: ViewerService,
     @Inject(viewerConfig) protected config: AudioViewerConfig
   ) {
-    super(viewerService);
+    super(readerService, viewerService);
   }
 
   ngOnInit() {

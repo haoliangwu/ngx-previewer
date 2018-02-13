@@ -23,7 +23,7 @@ export class NativeVideoViewerComponent extends BaseViewerComponent implements O
     @Inject(forwardRef(() => ViewerService)) protected viewerService: ViewerService,
     @Inject(viewerConfig) protected config: VideoViewerConfig
   ) {
-    super(viewerService);
+    super(readerService, viewerService);
   }
 
   ngOnInit() {

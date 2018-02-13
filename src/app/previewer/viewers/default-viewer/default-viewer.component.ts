@@ -1,6 +1,7 @@
 import { Component, OnInit, forwardRef, Inject } from '@angular/core';
 import { BaseViewerComponent } from '../base-viewer/base-viewer.component';
 import { ViewerService } from '../../viewer.service';
+import { ReaderService } from '../../reader.service';
 
 @Component({
   selector: 'ngx-default-viewer',
@@ -9,9 +10,10 @@ import { ViewerService } from '../../viewer.service';
 })
 export class DefaultViewerComponent extends BaseViewerComponent {
   constructor(
+    public readerService: ReaderService,
     @Inject(forwardRef(() => ViewerService)) protected viewerService: ViewerService,
   ) {
-    super(viewerService);
+    super(readerService, viewerService);
   }
 
   loadFile(file: File): void {

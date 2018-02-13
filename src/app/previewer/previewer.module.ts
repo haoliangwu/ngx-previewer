@@ -6,8 +6,8 @@ import { ViewerService } from './viewer.service';
 import { GlobalConfig } from './model/config';
 import { globalConfig } from './model/config';
 
-import { SafeUrlPipe } from './pipes/safe-url.pipe';
-import { DefaultViewerComponent, ImgViewerComponent, NativeAudioViewerComponent, NativeVideoViewerComponent, BaseViewerComponent } from './viewers/index';
+import { SafeUrlPipe, SafeResourceUrlPipe } from './pipes/safe-url.pipe';
+import { DefaultViewerComponent, ImgViewerComponent, NativeAudioViewerComponent, NativeVideoViewerComponent, BaseViewerComponent, PdfViewerComponent } from './viewers/index';
 
 
 
@@ -15,7 +15,8 @@ export const DEFAULT_VIEWER_COMPS = [
   DefaultViewerComponent,
   ImgViewerComponent,
   NativeAudioViewerComponent,
-  NativeVideoViewerComponent
+  NativeVideoViewerComponent,
+  PdfViewerComponent
 ];
 
 @NgModule({
@@ -23,12 +24,17 @@ export const DEFAULT_VIEWER_COMPS = [
     CommonModule
   ],
   declarations: [
-    ImgViewerComponent,
-    PreviewContainerComponent,
+    // viewer comps
     DefaultViewerComponent,
+    ImgViewerComponent,
     NativeAudioViewerComponent,
+    NativeVideoViewerComponent,
+    PdfViewerComponent,
+    // container comp
+    PreviewContainerComponent,
+    // pipe
     SafeUrlPipe,
-    NativeVideoViewerComponent
+    SafeResourceUrlPipe
   ],
   exports: [
     PreviewContainerComponent

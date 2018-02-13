@@ -44,3 +44,7 @@ export interface AudioViewerConfig extends ViewerConfig {
 export interface VideoViewerConfig extends ViewerConfig {
   autoPlay: boolean;
 }
+
+export interface PdfViewerConfig extends ViewerConfig {
+  workerSrc: string;
+}

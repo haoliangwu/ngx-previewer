@@ -3,3 +3,4 @@ export { DefaultViewerComponent } from './default-viewer/default-viewer.componen
 export { ImgViewerComponent } from './img-viewer/img-viewer.component';
 export { NativeAudioViewerComponent } from './audio-viewer/native-audio-viewer.component';
 export { NativeVideoViewerComponent } from './video-viewer/native-video-viewer.component';
+export { PdfViewerComponent } from './pdf-viewer/pdf-viewer.component';
