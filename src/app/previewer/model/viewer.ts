@@ -47,4 +47,5 @@ export interface VideoViewerConfig extends ViewerConfig {
 
 export interface PdfViewerConfig extends ViewerConfig {
   workerSrc: string;
+  autoFit: boolean;
 }

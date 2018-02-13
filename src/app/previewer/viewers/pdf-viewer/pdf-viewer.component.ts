@@ -10,6 +10,7 @@ import { PdfService, RenderContext, RenderContextWithPage } from './pdf.service'
 import { tap, map } from 'rxjs/operators';
 import { switchMap } from 'rxjs/operators/switchMap';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'ngx-pdf-viewer',
@@ -20,9 +21,10 @@ import { Observable } from 'rxjs/Observable';
 export class PdfViewerComponent extends BaseViewerComponent<PdfViewerConfig> implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('viewer') private viewerRef: ElementRef;
   private canvas: HTMLCanvasElement;
+  private load$$: Subscription;
 
   constructor(
-    // private containerComp: PreviewContainerComponent,
+    private containerComp: PreviewContainerComponent,
     public readerService: ReaderService,
     @Inject(forwardRef(() => ViewerService)) protected viewerService: ViewerService,
     @Inject(viewerConfig) protected config: PdfViewerConfig,
@@ -34,17 +36,10 @@ export class PdfViewerComponent extends BaseViewerComponent<PdfViewerConfig> imp
   ngOnInit() {
     PDFJS.workerSrc = this.config.workerSrc;
 
-    const url = '//cdn.mozilla.net/pdfjs/helloworld.pdf';
-
-    const load$ = this.pdfService.load(url);
-
-    load$.pipe(
+    this.load$$ = this.pdfService.load(this.readerService.objectURL).pipe(
       map(page => this.prerender(page)),
       switchMap(({ page, context }) => this.render(page, context)),
-      tap(() => {
-        // TODO 应当抽离为独立的方法
-        this.viewerInDone();
-      })
+      tap(() => this.viewerInDone())
     ).subscribe();
 
     this.loadPage(1);
@@ -58,6 +53,7 @@ export class PdfViewerComponent extends BaseViewerComponent<PdfViewerConfig> imp
 
   ngOnDestroy() {
     this.readerService.revokeObjectURL();
+    this.load$$.unsubscribe();
   }
 
   loadFile(file: File): void {
@@ -67,13 +63,24 @@ export class PdfViewerComponent extends BaseViewerComponent<PdfViewerConfig> imp
   prerender(page: PDFPageProxy): RenderContextWithPage {
     console.log('Page loaded');
 
-    const scale = 1.5;
-    const viewport = page.getViewport(scale);
+    let scale = 1;
+    let viewport = page.getViewport(scale);
 
-    // Prepare canvas using PDF page dimensions
+    if (this.config.autoFit) {
+      const scaleX = this.containerComp.width / viewport.width;
+      const scaleY = this.containerComp.height / viewport.height;
+
+      scale = scaleY > scaleX ? scaleX : scaleY;
+
+      scale = scale > 1 ? scale = 1 : scale;
+
+      viewport = page.getViewport(scale);
+    }
+
     const context = this.canvas.getContext('2d');
-    this.canvas.height = viewport.height;
+
     this.canvas.width = viewport.width;
+    this.canvas.height = viewport.height;
 
     // Render PDF page into canvas context
     const renderContext: RenderContext = {

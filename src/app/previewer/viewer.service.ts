@@ -23,7 +23,8 @@ export class ViewerService {
     pdf: {
       viewer: PdfViewerComponent,
       config: {
-        workerSrc: '//mozilla.github.io/pdf.js/build/pdf.worker.js'
+        workerSrc: '//mozilla.github.io/pdf.js/build/pdf.worker.js',
+        autoFit: true
       } as PdfViewerConfig
     }
   };
