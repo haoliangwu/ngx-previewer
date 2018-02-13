@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { NgxPreviewModule, DEFAULT_VIEWER_COMPS } from './previewer/index';
-import { DefaultViewerComponent } from './previewer/default-viewer/default-viewer.component';
+import { DefaultViewerComponent } from './previewer/viewers/index';
 import { LoadingMaskModule } from 'ngx-loading-mask';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 

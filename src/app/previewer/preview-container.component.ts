@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges, Host, Injector, ComponentFactoryResolver, OnInit, ComponentRef, Renderer2, ViewContainerRef, ComponentFactory } from '@angular/core';
 import { ComponentPortal, DomPortalHost } from '@angular/cdk/portal';
 
-import { BaseViewerComponent } from './base-viewer/base-viewer.component';
+import { BaseViewerComponent } from './viewers/index';
 import { ReaderService } from './reader.service';
 import { ViewerService } from './viewer.service';
 import { getBlockElementRect } from './utils/dom';

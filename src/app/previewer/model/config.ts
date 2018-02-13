@@ -1,14 +1,9 @@
 import { ViewerRules, ViewerRule, ImgViewerConfig, ViewerConfig } from './viewer';
-import { BaseViewerComponent } from '../base-viewer/base-viewer.component';
 
 import { InjectionToken } from '@angular/core';
 import { GlobalConfig } from './config';
 
-import { DefaultViewerComponent } from '../default-viewer/default-viewer.component';
-import { ImgViewerComponent } from '../img-viewer/img-viewer.component';
-import { NativeAudioViewerComponent } from '../audio-viewer/native-audio-viewer.component';
-import { NativeVideoViewerComponent } from '../video-viewer/native-video-viewer.component';
-
+import { DefaultViewerComponent, ImgViewerComponent, NativeAudioViewerComponent, NativeVideoViewerComponent, BaseViewerComponent } from '../viewers/index';
 
 export const globalConfig: InjectionToken<GlobalConfig<BaseViewerComponent>> = new InjectionToken('preview.global.config');
 

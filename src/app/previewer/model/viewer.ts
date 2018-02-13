@@ -1,5 +1,5 @@
-import { BaseViewerComponent } from '../base-viewer/base-viewer.component';
 import { Type } from '@angular/core';
+import { BaseViewerComponent } from '../viewers/index';
 
 export enum ViewerStatus {
   PENDING = 'pending',

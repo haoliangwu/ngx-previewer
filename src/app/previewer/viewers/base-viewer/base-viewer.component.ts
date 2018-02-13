@@ -1,13 +1,13 @@
 import { Component, ElementRef, Inject, forwardRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { fromEvent } from 'rxjs/observable/fromEvent';
-import { ReaderService } from '../reader.service';
-import { ViewerService } from '../viewer.service';
-import { ViewerInfo, ViewerConfig } from '../model/viewer';
+import { ReaderService } from '../../reader.service';
+import { ViewerService } from '../../viewer.service';
+import { ViewerInfo, ViewerConfig } from '../../model/viewer';
 
 export abstract class BaseViewerComponent {
   constructor(
-    @Inject(forwardRef(() => ViewerService)) protected viewService: ViewerService
+    @Inject(forwardRef(() => ViewerService)) public viewService: ViewerService
   ) { }
 
   abstract loadFile(file: File): void;

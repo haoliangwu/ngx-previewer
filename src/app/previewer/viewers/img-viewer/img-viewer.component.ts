@@ -3,12 +3,12 @@ import { BaseViewerComponent } from '../base-viewer/base-viewer.component';
 import { Subscription } from 'rxjs/Subscription';
 import { tap, map } from 'rxjs/operators';
 import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
-import { PreviewContainerComponent } from '../preview-container.component';
-import { ReaderService } from '../reader.service';
-import { viewerConfig } from '../model/config';
-import { ImgViewerConfig, ViewerStatus } from '../model/viewer';
-import { geometricScaling, alignCenter } from '../utils/calc';
-import { ViewerService } from '../viewer.service';
+import { PreviewContainerComponent } from '../../preview-container.component';
+import { ReaderService } from '../../reader.service';
+import { viewerConfig } from '../../model/config';
+import { ImgViewerConfig, ViewerStatus } from '../../model/viewer';
+import { geometricScaling, alignCenter } from '../../utils/calc';
+import { ViewerService } from '../../viewer.service';
 
 @Component({
   selector: 'ngx-img-viewer',

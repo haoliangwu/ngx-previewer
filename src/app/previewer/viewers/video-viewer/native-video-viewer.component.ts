@@ -1,28 +1,27 @@
 import { Component, OnInit, OnDestroy, ElementRef, ViewChild, Inject, forwardRef } from '@angular/core';
 import { BaseViewerComponent } from '../base-viewer/base-viewer.component';
-import { ReaderService } from '../reader.service';
 import { Observable } from 'rxjs/Observable';
+import { VideoViewerConfig } from '../../model/viewer';
+import { viewerConfig } from '../../model/config';
+import { ReaderService } from '../../reader.service';
 import { fromEvent } from 'rxjs/observable/fromEvent';
-import { Subscription } from 'rxjs/Subscription';
-import { viewerConfig } from '../model/config';
-import { AudioViewerConfig } from '../model/viewer';
-import { ViewerService } from '../viewer.service';
+import { ViewerService } from '../../viewer.service';
 
 @Component({
-  selector: 'ngx-native-audio-viewer',
-  templateUrl: './native-audio-viewer.component.html',
-  styleUrls: ['./native-audio-viewer.component.scss']
+  selector: 'ngx-native-video-viewer',
+  templateUrl: './native-video-viewer.component.html',
+  styleUrls: ['./native-video-viewer.component.scss']
 })
-export class NativeAudioViewerComponent extends BaseViewerComponent implements OnInit, OnDestroy {
+export class NativeVideoViewerComponent extends BaseViewerComponent implements OnInit, OnDestroy {
   private canplay$: Observable<Event>;
-  private $player: HTMLAudioElement;
+  private $player: HTMLVideoElement;
 
   @ViewChild('player', { read: ElementRef }) protected player: ElementRef;
 
   constructor(
     public readerService: ReaderService,
     @Inject(forwardRef(() => ViewerService)) protected viewerService: ViewerService,
-    @Inject(viewerConfig) protected config: AudioViewerConfig
+    @Inject(viewerConfig) protected config: VideoViewerConfig
   ) {
     super(viewerService);
   }
@@ -33,7 +32,7 @@ export class NativeAudioViewerComponent extends BaseViewerComponent implements O
     this.canplay$ = fromEvent(this.$player, 'canplay');
 
     this.canplay$.subscribe(e => {
-
+      this.render();
     });
   }
 

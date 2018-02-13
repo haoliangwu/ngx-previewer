@@ -1,6 +1,6 @@
 import { Component, OnInit, forwardRef, Inject } from '@angular/core';
 import { BaseViewerComponent } from '../base-viewer/base-viewer.component';
-import { ViewerService } from '../viewer.service';
+import { ViewerService } from '../../viewer.service';
 
 @Component({
   selector: 'ngx-default-viewer',
