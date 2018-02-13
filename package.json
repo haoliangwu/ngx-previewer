@@ -26,7 +26,10 @@
       "languageLevel": [
         "dom",
         "es2017"
-      ]
+      ],
+      "umdModuleIds": {
+        "pdfjs-dist": "PDFJS"
+      }
     }
   },
   "dependencies": {
